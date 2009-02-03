@@ -3,8 +3,9 @@ scenarios
 
 The idea behind 'scenarios' is simple.  Scenarions are basically just organized bits of arbitrary ruby code.
 
+
 why?
-====
+----
 
 Here's why scenarios were originally written ... you may use them however you wish!
 
@@ -24,7 +25,27 @@ Also, our application requires *some* data to be in the database for the app to
 load properly.  So we created a scenario that loads up the minimum amount of 
 data required to run the app!
 
-how?
-====
 
-**TODO** _I'll fill this out once I'm done!_
+how?
+----
+
+    $ sudo gem install remi-scenarios -s http://gems.github.com
+
+then, if you're in a Rails project ...
+
+    $ ./script/generate scenario Foo
+
+to see all defined scenarios ...
+
+    $ rake scenarios
+
+to load a particular scenario ...
+
+    $ rake scenarios:load NAME=my_scenario
+    $ rake scenarios:load NAME=my_scenario,and_some_more_scenarios
+
+
+what else?
+----------
+
+more documentation to come soon!
