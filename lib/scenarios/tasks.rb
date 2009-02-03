@@ -10,7 +10,7 @@ Scenario.verbose = true
 desc 'Print all available scenarios'
 task :scenarios do
   if Scenario.all.empty?
-    puts "there are no scenarios.  add some to ./spec/scenarios"
+    puts "there are no scenarios.  add some to one of the Scenario.load_paths: #{ Scenario.load_paths.inspect }"
   else
     Scenario.all.each do |scenario|
       puts "#{ scenario.name }: #{ scenario.description }"

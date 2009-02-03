@@ -59,7 +59,7 @@ class Scenario
     # any .rb file found in these directories is assumed to 
     # be a scenario
     #
-    attr_accessor :load_paths, :verbose
+    attr_accessor :load_paths, :verbose, :before_blocks
 
     # returns all Scenarios found using Scenario#load_paths
     def all
@@ -69,6 +69,15 @@ class Scenario
         end
         all_scenarios
       end
+    end
+
+    # run some block of code before any scenarios run
+    #
+    # good for last-minute require statements and whatnot
+    #
+    def before &block
+      @before_blocks ||= []
+      @before_blocks << block if block
     end
 
     # returns a scenario by name, eg. Scenario[:foo]
@@ -95,6 +104,7 @@ class Scenario
     #   Scenario.load :names, 'work', :too
     #
     def load *scenarios
+      @before_blocks.each { |b| b.call } if @before_blocks and not @before_blocks.empty?
       # TODO should be able to define some block that scenarios get evaluated in!
       #      or some things that scenarios might want to require or ...
       scenarios.each do |scenario|
