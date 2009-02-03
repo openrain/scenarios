@@ -17,7 +17,15 @@ class ScenarioGenerator < Rails::Generator::Base
 
   # this should be done by ./script/generate blackbox
   def setup_rails_to_run_scenarios
-    # bootstrap
+    rakefile = File.join RAILS_ROOT, 'Rakefile'
+    if File.file? rakefile
+      source = File.read rakefile
+      unless source =~ /require .scenarios.tasks./
+        File.open( rakefile, 'a' ) do |f|
+          f << %[require 'scenarios/tasks']
+        end
+      end
+    end
   end
 
   def manifest
