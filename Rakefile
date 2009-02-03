@@ -12,6 +12,7 @@ begin
     s.homepage    = "http://github.com/remi/scenarios"
     s.description = "Create, Organize, and Run arbitrary snippets of Ruby code"
     s.authors     = %w( remi )
+    s.files       = FileList["[A-Z]*", "{lib,spec,examples,rails_generators}/**/*"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
