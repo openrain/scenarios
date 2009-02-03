@@ -101,4 +101,12 @@ describe Scenario do
     Scenario[:first].to_s.should == 'first'
   end
 
+  it 'should allow globbing in load_paths' do
+    Scenario.load_paths = [ File.join(File.dirname(__FILE__), '..', 'examp*', '**') ]
+
+    Scenario.all.length.should == 2
+    Scenario.all.map(&:name).should include('first')
+    Scenario.all.map(&:name).should include('foo')
+  end
+
 end
