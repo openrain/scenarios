@@ -9,7 +9,7 @@ class ScenarioGenerator < Rails::Generator::Base
   #   runtime_options: {:quiet=>false, :generator=>"scenario", :command=>:create, :collision=>:ask}
   #
   def initialize(runtime_args, runtime_options = {})
-    # setup_rails_to_run_scenarios
+    setup_rails_to_run_scenarios
     @name_of_scenario_to_create      = runtime_args.join(' ')
     @name_of_scenario_file_to_create = runtime_args.join('_').downcase
     super
