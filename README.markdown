@@ -49,3 +49,9 @@ what else?
 ----------
 
 more documentation to come soon!
+
+
+TODO
+----
+
+ - i forgot to import the `scenarios` method so it's accessible from test / specs ... fix!
