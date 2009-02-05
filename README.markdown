@@ -55,3 +55,4 @@ TODO
 ----
 
  - i forgot to import the `scenarios` method so it's accessible from test / specs ... fix!
+ - make the scenario directory for the generator configurable (and that dir should always be included in the Scenario loadpath
