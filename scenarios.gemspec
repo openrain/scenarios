@@ -2,14 +2,14 @@
 
 Gem::Specification.new do |s|
   s.name = %q{scenarios}
-  s.version = "0.1.2"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["remi"]
-  s.date = %q{2009-02-03}
+  s.date = %q{2009-02-06}
   s.description = %q{Create, Organize, and Run arbitrary snippets of Ruby code}
   s.email = %q{remi@remitaylor.com}
-  s.files = ["MIT-LICENSE", "Rakefile", "VERSION.yml", "README.markdown", "lib/scenarios", "lib/scenarios/tasks.rb", "lib/scenarios.rb", "spec/scenario_spec.rb", "spec/spec_helper.rb", "examples/scenarios", "examples/scenarios/first.rb", "examples/more_scenarios", "examples/more_scenarios/foo.rb", "rails_generators/scenario", "rails_generators/scenario/USAGE", "rails_generators/scenario/scenario_generator.rb", "rails_generators/scenario/templates", "rails_generators/scenario/templates/scenario.erb"]
+  s.files = ["Rakefile", "VERSION.yml", "README.markdown", "LICENSE", "lib/scenarios", "lib/scenarios/spec.rb", "lib/scenarios/scenario.rb", "lib/scenarios/tasks.rb", "lib/scenarios.rb", "spec/scenario_spec.rb", "spec/spec_helper.rb", "spec/scenario_spec_spec.rb", "examples/scenarios", "examples/scenarios/first.rb", "examples/additional_scenarios", "examples/additional_scenarios/load_me_too.rb", "examples/additional_scenarios/load_me.rb", "examples/more_scenarios", "examples/more_scenarios/foo.rb", "rails_generators/scenario", "rails_generators/scenario/USAGE", "rails_generators/scenario/scenario_generator.rb", "rails_generators/scenario/templates", "rails_generators/scenario/templates/scenario.erb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/openrain/scenarios}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
