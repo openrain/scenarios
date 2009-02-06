@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = %q{remi@remitaylor.com}
   s.files = ["MIT-LICENSE", "Rakefile", "VERSION.yml", "README.markdown", "lib/scenarios", "lib/scenarios/tasks.rb", "lib/scenarios.rb", "spec/scenario_spec.rb", "spec/spec_helper.rb", "examples/scenarios", "examples/scenarios/first.rb", "examples/more_scenarios", "examples/more_scenarios/foo.rb", "rails_generators/scenario", "rails_generators/scenario/USAGE", "rails_generators/scenario/scenario_generator.rb", "rails_generators/scenario/templates", "rails_generators/scenario/templates/scenario.erb"]
   s.has_rdoc = true
-  s.homepage = %q{http://github.com/remi/scenarios}
+  s.homepage = %q{http://github.com/openrain/scenarios}
   s.rdoc_options = ["--inline-source", "--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
