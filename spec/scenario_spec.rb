@@ -1,7 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-# this isn't exactly a model ... just something that helps 
-# with out development and speccing
 describe Scenario do
 
   def path_to_test_scenarios
