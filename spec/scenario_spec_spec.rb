@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Scenario::Helper do
+describe Scenario::Spec do
 
   def path_to_test_scenarios
     File.join File.dirname(__FILE__), '..', 'examples', 'scenarios'
