@@ -8,7 +8,7 @@ begin
   Jeweler::Tasks.new do |s|
     s.name        = "scenarios"
     s.summary     = "Create, Organize, and Run arbitrary snippets of Ruby code"
-    s.email       = "remi@remitaylor.com"
+    s.email       = "remi.taylor@openrain.com"
     s.homepage    = "http://github.com/openrain/scenarios"
     s.description = "Create, Organize, and Run arbitrary snippets of Ruby code"
     s.authors     = %w( remi )
