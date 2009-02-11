@@ -1,11 +1,8 @@
-scenarios
-=========
+= scenarios
 
 The idea behind 'scenarios' is simple.  Scenarions are basically just organized bits of arbitrary ruby code.
 
-
-why?
-----
+== why?
 
 Here's why scenarios were originally written ... you may use them however you wish!
 
@@ -25,9 +22,7 @@ Also, our application requires *some* data to be in the database for the app to
 load properly.  So we created a scenario that loads up the minimum amount of 
 data required to run the app!
 
-
-how?
-----
+== how?
 
     $ sudo gem install remi-scenarios -s http://gems.github.com
 
@@ -44,15 +39,11 @@ to load a particular scenario ...
     $ rake scenarios:load NAME=my_scenario
     $ rake scenarios:load NAME=my_scenario,and_some_more_scenarios
 
-
-what else?
-----------
+== what else?
 
 more documentation to come soon!
 
-
-TODO
-----
+== TODO
 
  - make the scenario directory for the generator configurable (and that dir should always be included in the Scenario loadpath
  - make all scenarios load within a specific context and add hooks so people can update/modify that context
