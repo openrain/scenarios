@@ -22,6 +22,10 @@ Also, our application requires *some* data to be in the database for the app to
 load properly.  So we created a scenario that loads up the minimum amount of 
 data required to run the app!
 
+== documentation
+
+Read the RDoc[http://openrain.github.com/scenarios]
+
 == how?
 
     $ sudo gem install remi-scenarios -s http://gems.github.com
