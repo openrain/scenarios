@@ -49,6 +49,8 @@ more documentation to come soon!
 
 == TODO
 
+- add a 'scenario' bin script so you don't necessarily have to use rake?  potentially?  maybe check for local .scenariorc?
+- should be able to 'show' a full, long description of what a scenario does (*full* header comment)
 - document the context that scenarios are loaded within ... right now we're using #load, which is nice because it gets line numbers for exceptions ... altho eval'ing the code gives us more control over the context its loaded in
 - add dependencies so one scenario can call another one
 - make the scenario directory for the generator configurable (and that dir should always be included in the Scenario loadpath
