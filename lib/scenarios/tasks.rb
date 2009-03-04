@@ -33,6 +33,18 @@ namespace :scenarios do
     end
   end
 
+  desc 'scenarios:show NAME=foo OR NAME=a,b,c'
+  task :show do
+    if ENV['NAME']
+      names = ENV['NAME'].split(',')
+      names.each do |scenario_name|
+        puts "this would puts out some kindof information / description for #{ scenario_name }"
+      end
+    else
+      puts "you need to pass NAME=scenario_name to load a scenario"
+    end
+  end
+
 end
 
 =begin

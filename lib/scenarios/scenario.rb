@@ -25,11 +25,11 @@ class Scenario
   alias to_s name
 
   # if the first line of the scenario's source code 
-  # is a comment, we use it as the scenario's description
+  # is a comment, we use it as the scenario's summary
   #
-  # ideally, all scenarios should have a short simple description
+  # ideally, all scenarios should have a short simple summary
   #
-  def description
+  def summary
     if first_line =~ /^#/
       first_line.sub(/^#*/, '').strip
     else
@@ -38,16 +38,27 @@ class Scenario
   end
 
   def first_line
-    source_code.split("\n").first
+    header.split("\n").first #.gsub(/^#* ?/, '')
   end
 
   def source_code
     File.read file_path
   end
 
+  def description
+    header.gsub(/^#* ?/, '')
+  end
+
   # evaluates the code of the scenario
   def load
     self.class.load self # pass the loading off to the class
+  end
+
+  protected
+
+  # Comment header, any comments at the top of the source code
+  def header
+    source_code.gsub /\n^[^#].*/m, ''
   end
 
   class << self
@@ -120,7 +131,7 @@ class Scenario
       #      or some things that scenarios might want to require or ...
       scenarios.each do |scenario|
         scenario = self[scenario] unless scenario.is_a?Scenario # try getting using self[] if not a scenario
-        puts "loading #{ scenario.name } (#{ scenario.description })" if Scenario.verbose && scenario.is_a?(Scenario)
+        puts "loading #{ scenario.name } (#{ scenario.summary })" if Scenario.verbose && scenario.is_a?(Scenario)
         begin
           if scenario.is_a?Scenario
             puts "loading scenario: #{ scenario.file_path }" if Scenario.verbose

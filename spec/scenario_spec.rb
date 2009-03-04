@@ -61,8 +61,12 @@ describe Scenario do
     Scenario.all.first.name.should == 'first'
   end
 
+  it 'should have a summary' do
+    Scenario.all.first.summary.should == 'i am the summary'
+  end
+
   it 'should have a description' do
-    Scenario.all.first.description.should == 'i am the description'
+    Scenario.all.first.description.should == "i am the summary\n\n  only the first line\n  should be included in the summary\n\nno space here\n"
   end
 
   it 'should be loadable' do
