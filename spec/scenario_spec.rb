@@ -91,6 +91,34 @@ describe Scenario do
     $set_by_first_scenario.should == 'hello from first scenario!'
   end
 
+  it 'should be able to load multiple scenarios and run any dependencies' do
+    path = File.join File.dirname(__FILE__), '..', 'examples', 'testing_dependencies'
+    Scenario.load_paths << path
+
+    Scenario[:load_more_stuff].dependencies.should include(:load_stuff)
+
+    $times_loads_stuff_has_been_run.should be_nil
+    $times_loads_more_stuff_has_been_run.should be_nil
+
+    Scenario.load :load_stuff
+    $times_loads_stuff_has_been_run.should == 1
+    $times_loads_more_stuff_has_been_run.should be_nil
+
+    Scenario.load :load_stuff, :load_stuff
+    $times_loads_stuff_has_been_run.should == 3
+    $times_loads_more_stuff_has_been_run.should be_nil
+
+    Scenario.load :load_more_stuff
+    $times_loads_stuff_has_been_run.should == 4 # should be run once, as it's a dependency
+    $times_loads_more_stuff_has_been_run.should == 1
+
+    Scenario.load :load_stuff, :load_more_stuff
+    $times_loads_stuff_has_been_run.should == 6 # should be run twice
+    $times_loads_more_stuff_has_been_run.should == 2
+  end
+
+  it 'should be able to load multiple scenarios and run any dependencies (running each dependency only once!)'
+
   it 'should be able to load multiple scenarios' do
     Scenario.load_paths << path_to_more_scenarios
 

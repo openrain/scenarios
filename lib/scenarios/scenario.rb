@@ -147,7 +147,13 @@ class Scenario
         begin
           if scenario.is_a?Scenario
             puts "loading scenario: #{ scenario.file_path }" if Scenario.verbose
+
+            # TODO update to eval ... should load in a custom context ...
+            #      the eval should also catch exceptions and print the 
+            #      line number that threw the exception, etc etc
             Kernel::load scenario.file_path
+
+            self.load *scenario.dependencies if scenario.dependencies
           else
             puts "Unsure how to load scenario: #{ scenario.inspect }"
           end
