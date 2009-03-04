@@ -139,8 +139,33 @@ class Scenario
     def load *scenarios
       puts "called Scenario.load with scenarios #{ scenarios.inspect }" if Scenario.verbose
       @before_blocks.each { |b| b.call } if @before_blocks and not @before_blocks.empty?
+      
       # TODO should be able to define some block that scenarios get evaluated in!
       #      or some things that scenarios might want to require or ...
+
+      options = ( scenarios.last.is_a?(Hash) ) ? scenarios.pop : { }
+      options[:unique] ||= false # whether each scenario passed has to be unique ... will likely change this to be true by default
+
+      # make sure everything is actually a Scenario object
+      scenarios.map! do |scenario|
+        scenario.is_a?(Scenario) ? scenario : self[scenario]
+      end
+
+      scenarios.compact! # get rid of any nils
+
+      scenarios = scenarios.inject([]) do |all, scenario|
+        all << scenario
+        all += Scenario[ nil, *scenario.dependencies ] if scenario.dependencies
+        all
+      end
+
+      # TODO clean up this crazy lame mess ... also, this doesn't 
+      #      guarantee order, which is a huge fail wrt dependencies!
+      scenarios = scenarios.inject({}) { |all, scenario|
+        all[ scenario.name ] = scenario
+        all
+      }.values if options[:unique]
+
       scenarios.each do |scenario|
         scenario = self[scenario] unless scenario.is_a?Scenario # try getting using self[] if not a scenario
         puts "loading #{ scenario.name } (#{ scenario.summary })" if Scenario.verbose && scenario.is_a?(Scenario)
@@ -152,8 +177,6 @@ class Scenario
             #      the eval should also catch exceptions and print the 
             #      line number that threw the exception, etc etc
             Kernel::load scenario.file_path
-
-            self.load *scenario.dependencies if scenario.dependencies
           else
             puts "Unsure how to load scenario: #{ scenario.inspect }"
           end

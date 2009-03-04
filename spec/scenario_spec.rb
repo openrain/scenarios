@@ -92,6 +92,7 @@ describe Scenario do
   end
 
   it 'should be able to load multiple scenarios and run any dependencies' do
+    $times_loads_stuff_has_been_run, $times_loads_more_stuff_has_been_run = nil, nil
     path = File.join File.dirname(__FILE__), '..', 'examples', 'testing_dependencies'
     Scenario.load_paths << path
 
@@ -117,7 +118,15 @@ describe Scenario do
     $times_loads_more_stuff_has_been_run.should == 2
   end
 
-  it 'should be able to load multiple scenarios and run any dependencies (running each dependency only once!)'
+  it 'should be able to load multiple scenarios and run any dependencies (running each dependency only once!)' do
+    $times_loads_stuff_has_been_run, $times_loads_more_stuff_has_been_run = nil, nil
+    path = File.join File.dirname(__FILE__), '..', 'examples', 'testing_dependencies'
+    Scenario.load_paths << path
+
+    Scenario.load :load_stuff, :load_more_stuff, :unique => true
+    $times_loads_stuff_has_been_run.should == 1 # should only run once!
+    $times_loads_more_stuff_has_been_run.should == 1
+  end
 
   it 'should be able to load multiple scenarios' do
     Scenario.load_paths << path_to_more_scenarios
