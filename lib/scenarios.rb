@@ -1,6 +1,8 @@
 $:.unshift File.dirname(__FILE__)
 
+require 'rubygems'
 require 'indifferent-variable-hash'
+require 'scenarios/scenarios'
 require 'scenarios/scenario'
 
 # TODO not 100% sure if i want this

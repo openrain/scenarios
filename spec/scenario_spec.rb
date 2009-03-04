@@ -22,7 +22,10 @@ describe Scenario do
     Scenario.load_paths = @original_scenario_paths
   end
 
-  it 'should grab variables from header (yaml?)'
+  # PENDING
+  # it 'should grab variables from header (yaml?)'
+  # it 'should not *require* a summary'
+  # it 'should not *require* a description'
 
   it 'should find scenario files properly' do
     Scenario.load_paths = []
@@ -62,9 +65,6 @@ describe Scenario do
     Scenario.all.first.should be_a_kind_of(Scenario)
     Scenario.all.first.name.should == 'first'
   end
-
-  it 'should not *require* a summary'
-  it 'should not *require* a description'
 
   it 'should have a summary' do
     Scenario.all.first.summary.should == 'i am the summary'
