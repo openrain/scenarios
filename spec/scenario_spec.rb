@@ -22,6 +22,8 @@ describe Scenario do
     Scenario.load_paths = @original_scenario_paths
   end
 
+  it 'should grab variables from header (yaml?)'
+
   it 'should find scenario files properly' do
     Scenario.load_paths = []
     Scenario.all.should be_empty
@@ -61,12 +63,26 @@ describe Scenario do
     Scenario.all.first.name.should == 'first'
   end
 
+  it 'should not *require* a summary'
+  it 'should not *require* a description'
+
   it 'should have a summary' do
     Scenario.all.first.summary.should == 'i am the summary'
   end
 
   it 'should have a description' do
-    Scenario.all.first.description.should == "i am the summary\n\n  only the first line\n  should be included in the summary\n\nno space here\n"
+    Scenario.all.first.description.should == "i am the summary\n\n  only the first line\n  should be included in the summary\n\nno space here"
+  end
+
+  it 'should allow yaml in the header to load up some custom variables (needs to be a hash)' do
+    path = File.join File.dirname(__FILE__), '..', 'examples', 'yaml_frontmatter'
+    Scenario.load_paths << path
+
+    Scenario[:yaml_in_header].name.should == 'yaml_in_header'
+    Scenario[:yaml_in_header].summary.should == 'i have some yaml'
+    Scenario[:yaml_in_header].description.should == "i have some yaml\n\n  hi there\n  indeed i do"
+    Scenario[:yaml_in_header].header.should include('foo: x')
+    Scenario[:yaml_in_header].foo.should == 'x'
   end
 
   it 'should be loadable' do
@@ -106,7 +122,7 @@ describe Scenario do
   it 'should allow globbing in load_paths' do
     Scenario.load_paths = [ File.join(File.dirname(__FILE__), '..', 'examp*', '**') ]
 
-    Scenario.all.length.should == 4
+    Scenario.all.length.should == Dir[File.join(File.dirname(__FILE__), '..', 'examp*', '**', '*.rb')].length
     Scenario.all.map(&:name).should include('first')
     Scenario.all.map(&:name).should include('foo')
   end

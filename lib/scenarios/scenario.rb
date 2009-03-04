@@ -12,11 +12,13 @@
 #      actually give private methods a private visibility
 #
 class Scenario
+  include IndifferentVariableHash
 
   attr_accessor :file_path
 
   def initialize file_path
     @file_path = file_path
+    source_code # does some parsing ... eager load this!  otherwise Scenario[:first].some_var won't work
   end
 
   def name
@@ -42,19 +44,29 @@ class Scenario
   end
 
   def source_code
-    File.read file_path
+    unless @source_code
+      # the first time we read in the source code, 
+      # see if there are any variables in the header 
+      # and, if so, set them via IndifferentVariableHash
+      @source_code = File.read file_path
+      yaml_frontmatter = header.gsub(/^#* ?/, '')[/^---.*/m]
+      if yaml_frontmatter
+        require 'yaml'
+        header_variables = YAML::load(yaml_frontmatter)
+        variables.merge!(header_variables) if header_variables
+      end
+    end
+    @source_code
   end
 
   def description
-    header.gsub(/^#* ?/, '')
+    header.gsub(/^#* ?/, '').gsub(/^---.*/m, '').strip # gets rid of comment hashes and yaml
   end
 
   # evaluates the code of the scenario
   def load
     self.class.load self # pass the loading off to the class
   end
-
-  protected
 
   # Comment header, any comments at the top of the source code
   def header
