@@ -12,7 +12,7 @@ task :scenarios do
     puts "there are no scenarios.  add some to one of the Scenario.load_paths: #{ Scenario.load_paths.inspect }"
   else
     Scenario.all.each do |scenario|
-      puts "#{ scenario.name }: #{ scenario.description }"
+      puts "#{ scenario.name }: #{ scenario.summary }"
     end  
   end
 end
