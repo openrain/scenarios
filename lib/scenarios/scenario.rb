@@ -144,7 +144,7 @@ class Scenario
       #      or some things that scenarios might want to require or ...
 
       options = ( scenarios.last.is_a?(Hash) ) ? scenarios.pop : { }
-      options[:unique] ||= false # whether each scenario passed has to be unique ... will likely change this to be true by default
+      options[:unique] ||= true # whether each scenario passed has to be unique ... will likely change this to be true by default
 
       # make sure everything is actually a Scenario object
       scenarios.map! do |scenario|

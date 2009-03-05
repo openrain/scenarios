@@ -14,6 +14,7 @@ begin
     s.authors     = %w( remi )
     s.files       = FileList["[A-Z]*", "{lib,spec,examples,rails_generators}/**/*"]
     s.add_dependency 'remi-indifferent-variable-hash' 
+    s.add_dependency 'remi-simplecli' 
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"

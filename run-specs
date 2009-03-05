@@ -1,0 +1,2 @@
+#! /bin/bash
+clear && spec -c -f specdoc spec/*_spec.rb

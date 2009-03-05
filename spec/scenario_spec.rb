@@ -101,19 +101,19 @@ describe Scenario do
     $times_loads_stuff_has_been_run.should be_nil
     $times_loads_more_stuff_has_been_run.should be_nil
 
-    Scenario.load :load_stuff
+    Scenario.load :load_stuff, :unique => false
     $times_loads_stuff_has_been_run.should == 1
     $times_loads_more_stuff_has_been_run.should be_nil
 
-    Scenario.load :load_stuff, :load_stuff
+    Scenario.load :load_stuff, :load_stuff, :unique => false
     $times_loads_stuff_has_been_run.should == 3
     $times_loads_more_stuff_has_been_run.should be_nil
 
-    Scenario.load :load_more_stuff
+    Scenario.load :load_more_stuff, :unique => false
     $times_loads_stuff_has_been_run.should == 4 # should be run once, as it's a dependency
     $times_loads_more_stuff_has_been_run.should == 1
 
-    Scenario.load :load_stuff, :load_more_stuff
+    Scenario.load :load_stuff, :load_more_stuff, :unique => false
     $times_loads_stuff_has_been_run.should == 6 # should be run twice
     $times_loads_more_stuff_has_been_run.should == 2
   end
@@ -123,7 +123,7 @@ describe Scenario do
     path = File.join File.dirname(__FILE__), '..', 'examples', 'testing_dependencies'
     Scenario.load_paths << path
 
-    Scenario.load :load_stuff, :load_more_stuff, :unique => true
+    Scenario.load :load_stuff, :load_more_stuff #, :unique => true  # <--- this should be the default!
     $times_loads_stuff_has_been_run.should == 1 # should only run once!
     $times_loads_more_stuff_has_been_run.should == 1
   end
