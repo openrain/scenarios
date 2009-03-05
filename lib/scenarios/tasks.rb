@@ -24,10 +24,7 @@ namespace :scenarios do
     puts "called scenarios:load" if Scenario.verbose
     if ENV['NAME']
       names = ENV['NAME'].split(',')
-      names.each do |scenario_name|
-        puts "Scenario.load #{scenario_name}"
-        Scenario.load scenario_name
-      end
+      Scenario.load *names
     else
       puts "you need to pass NAME=scenario_name to load a scenario"
     end
@@ -38,7 +35,12 @@ namespace :scenarios do
     if ENV['NAME']
       names = ENV['NAME'].split(',')
       names.each do |scenario_name|
-        puts "this would puts out some kindof information / description for #{ scenario_name }"
+        if scenario = Scenario[scenario_name]
+          puts scenario.info
+          puts ('-' * 40)
+        else
+          puts "Scenario not found: #{ scenario_name }"
+        end
       end
     else
       puts "you need to pass NAME=scenario_name to load a scenario"

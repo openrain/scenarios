@@ -26,6 +26,20 @@ class Scenario
   end
   alias to_s name
 
+  # returns a formatted string, showing information 
+  # about this current scenario
+  def info
+    str = <<INFO
+Scenario: #{ name }
+Summary: #{ summary }
+Description: #{ description_without_summary }
+INFO
+    variables.each do |key, value|
+      str << "#{ key }: #{ value.inspect }\n"
+    end
+    str
+  end
+
   # if the first line of the scenario's source code 
   # is a comment, we use it as the scenario's summary
   #
@@ -61,6 +75,12 @@ class Scenario
 
   def description
     header.gsub(/^#* ?/, '').gsub(/^---.*/m, '').strip # gets rid of comment hashes and yaml
+  end
+
+  def description_without_summary
+    parts = description.split("\n")
+    parts.shift
+    parts.join("\n")
   end
 
   # evaluates the code of the scenario
